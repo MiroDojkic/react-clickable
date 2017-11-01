@@ -8,5 +8,9 @@
     ],
     "react"
   ],
-  "plugins": ["transform-class-properties", "external-helpers"]
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "external-helpers"
+  ]
 }

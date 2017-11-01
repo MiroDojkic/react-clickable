@@ -365,6 +365,20 @@ var createClass = function () {
 
 
 
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
 
 
 var inherits = function (subClass, superClass) {
@@ -391,7 +405,17 @@ var inherits = function (subClass, superClass) {
 
 
 
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
 
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
 
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
@@ -2390,22 +2414,19 @@ var Clickable$1 = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          className = _props.className,
           children = _props.children,
-          onClick = _props.onClick,
-          ariaLabel = _props.ariaLabel;
+          ariaLabel = _props.ariaLabel,
+          rest = objectWithoutProperties(_props, ['children', 'ariaLabel']);
 
 
       return react_2(
         'div',
-        {
+        _extends({
           tabIndex: '0',
           role: 'button',
           'aria-label': ariaLabel,
-          onClick: onClick,
-          onKeyDown: this.onKeyDown,
-          className: className
-        },
+          onKeyDown: this.onKeyDown
+        }, rest),
         children
       );
     }

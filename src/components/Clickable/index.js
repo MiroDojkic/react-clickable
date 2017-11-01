@@ -23,16 +23,15 @@ export default class Clickable extends React.Component<Props, void> {
   };
 
   render() {
-    const { className, children, onClick, ariaLabel } = this.props;
+    const { children, ariaLabel, ...rest } = this.props;
 
     return (
       <div
         tabIndex="0"
         role="button"
         aria-label={ariaLabel}
-        onClick={onClick}
         onKeyDown={this.onKeyDown}
-        className={className}
+        {...rest}
       >
         {children}
       </div>
