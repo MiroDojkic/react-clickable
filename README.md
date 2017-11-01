@@ -40,7 +40,7 @@ class Item {
 ```
 
 ## Props
-```javascript
+```
 type Props = {
   onClick: (e: SyntheticEvent<*>) => void,
   children: React.Node,
