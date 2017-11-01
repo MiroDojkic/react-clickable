@@ -3,6 +3,9 @@
 Clickable React component that enables nesting `button` and `a` elements.
 
 Although this is often considered _bad_ practice in UI design, there are exceptions wherein accessible clickable component comes in handy.
+## Dependencies
+- `react`
+- `react-dom`
 
 ## Install
 ```
