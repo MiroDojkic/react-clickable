@@ -26,6 +26,9 @@ npm install --save react-clickable
 
 ## Usage
 
+:heavy_exclamation_mark: When nesting interactive elements, make sure to stop
+event propagation.
+
 ```javascript
 import * as React from 'react';
 import { Clickable, StopPropagation } from 'react-clickable';
@@ -43,10 +46,19 @@ class Item extends React.Component{
     console.log('Showing tooltip...');
   }
 
+  showModal() {
+    this.setState(state => ({
+      showModal: !state.showModal
+    }))
+  }
+
   render () {
     <Clickable onClick={this.onSelect}>
       <StopPropagation>
-        <SomeModal show={this.state.showModal} />
+        <SomeModal
+          show={this.state.showModal}
+          onClick={this.showModal}
+        />
       </StopPropagation>
       <div>Some clickable content!</div>
       <button
@@ -65,17 +77,18 @@ class Item extends React.Component{
 
 Pass an event handler that will be called on `Clickable` click
 
-### onKeyDown
-
-> `event => void` | `default: props.onClick`
-
-Pass an event handler that will be called on key press when `Clickable` is focused
-
 ### children
 
 > `React.Node`
 
 Children rendered inside `Clickable`
+
+### onKeyDown (optional)
+
+> `event => void` | `default: props.onClick`
+
+Pass an event handler that will be called on `Enter` or `Space` key press, when
+`Clickable` is focused
 
 ### ariaLabel (optional)
 
@@ -88,7 +101,6 @@ accessible name for `Clickable` component
 > `string`
 
 CSS class for `Clickable` element
-
 
 ## StopPropagation props
 
@@ -103,3 +115,12 @@ Children rendered inside `StopPropagation`.
 > `string`
 
 CSS class for `StopPropagation` element
+
+## Contribute
+
+If you find something missing or not working properly feel free to contribute or
+open an issue.
+
+## License
+
+MIT
