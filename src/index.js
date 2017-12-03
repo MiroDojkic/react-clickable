@@ -1,3 +1,4 @@
 import Clickable from './components/Clickable';
+import StopPropagation from './components/StopPropagation';
 
-export default Clickable;
+export { Clickable, StopPropagation };
