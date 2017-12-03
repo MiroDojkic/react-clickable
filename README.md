@@ -9,7 +9,7 @@ elements.
 * `StopPropagation` - component that stops event propagation to make a child of
   `Clickable` unclickable
 
-:rocket: Although this is considered _bad_ practice in UI design, there are
+:warning: Although this is considered _bad_ practice in UI design, there are
 exceptions wherein accessible clickable component comes in handy. Nevertheless,
 please reconsider if this is the right way to implement what you want.
 
