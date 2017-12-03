@@ -2,7 +2,6 @@ import flow from 'rollup-plugin-flow';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
-import css from 'modular-css-rollup';
 
 export default {
   input: 'src/index.js',
@@ -18,9 +17,6 @@ export default {
     }
   ],
   plugins: [
-    css({
-      css: 'dist/style.css'
-    }),
     flow(),
     commonjs({
       include: ['node_modules/**'],

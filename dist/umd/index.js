@@ -2086,41 +2086,6 @@ if (process.env.NODE_ENV === 'production') {
 var react_1 = react.Component;
 var react_2 = react.createElement;
 
-function cc(classes, prefix) {
-  var value;
-  var className = "";
-  var type = typeof classes;
-
-  if ((classes && type === "string") || type === "number") {
-    return classes
-  }
-
-  prefix = prefix || " ";
-
-  if (Array.isArray(classes) && classes.length) {
-    for (var i = 0, len = classes.length; i < len; i++) {
-      if ((value = cc(classes[i], prefix))) {
-        className += (className && prefix) + value;
-      }
-    }
-  } else {
-    for (var i in classes) {
-      if (classes.hasOwnProperty(i) && (value = classes[i])) {
-        className +=
-          (className && prefix) +
-          i +
-          (typeof value === "object" ? cc(value, prefix + i) : "");
-      }
-    }
-  }
-
-  return className
-}
-
-var s = {
-    "clickable": "mc56e980f0_clickable"
-};
-
 var asyncGenerator = function () {
   function AwaitValue(value) {
     this.value = value;
@@ -2356,14 +2321,13 @@ var Clickable = function (_React$Component) {
       var _props = this.props,
           children = _props.children,
           ariaLabel = _props.ariaLabel,
-          className = _props.className,
-          rest = objectWithoutProperties(_props, ['children', 'ariaLabel', 'className']);
+          rest = objectWithoutProperties(_props, ['children', 'ariaLabel']);
 
 
       return react_2(
         'div',
         _extends({
-          className: cc([s.clickable, className]),
+          style: { cursor: 'pointer' },
           tabIndex: '0',
           role: 'button',
           'aria-label': ariaLabel,
@@ -2379,10 +2343,6 @@ var Clickable = function (_React$Component) {
 Clickable.defaultProps = {
   ariaLabel: '',
   className: ''
-};
-
-var s$1 = {
-    "stopPropagation": "mc0b0a1447_stopPropagation"
 };
 
 //      
@@ -2412,21 +2372,16 @@ var StopPropagation = function (_React$Component) {
   createClass(StopPropagation, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          className = _props.className;
-
-
       return react_2(
         'div',
         {
-          className: cc(s$1.stopPropagation, className),
+          style: { cursor: 'default' },
           role: 'button',
           tabIndex: '-1',
           onKeyDown: this.onKeyDown,
           onClick: this.onClick
         },
-        children
+        this.props.children
       );
     }
   }]);

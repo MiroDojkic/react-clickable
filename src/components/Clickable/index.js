@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react';
-import cc from 'classcat';
-import s from './styles.css';
 
 type Props = {
   onClick: (e: SyntheticEvent<*>) => void,
@@ -25,16 +23,16 @@ export default class Clickable extends React.Component<Props, void> {
   };
 
   render() {
-    const { children, ariaLabel, className, ...rest } = this.props;
+    const { children, ariaLabel, onKeyDown, ...rest } = this.props;
 
     return (
       <div
-        className={cc([s.clickable, className])}
+        {...rest}
+        style={{ cursor: 'pointer' }}
         tabIndex="0"
         role="button"
         aria-label={ariaLabel}
-        onKeyDown={this.onKeyDown}
-        {...rest}
+        onKeyDown={onKeyDown ? onKeyDown : this.onKeyDown}
       >
         {children}
       </div>

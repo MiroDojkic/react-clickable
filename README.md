@@ -1,24 +1,40 @@
 # react-clickable
 
-Clickable React component that enables nesting `button` and `a` elements.
+React components that enable nesting interactive elements within `clickable`
+elements.
 
-Although this is often considered _bad_ practice in UI design, there are exceptions wherein accessible clickable component comes in handy.
+## Components:
+
+* `Clickable` - accessible clickable component
+* `StopPropagation` - component that stops event propagation to make a child of
+  `Clickable` unclickable
+
+:rocket: Although this is considered _bad_ practice in UI design, there are
+exceptions wherein accessible clickable component comes in handy. Nevertheless,
+please reconsider if this is the right way to implement what you want.
+
 ## Dependencies
-- `react`
-- `react-dom`
+
+* `react`
+* `react-dom`
 
 ## Install
+
 ```
 npm install --save react-clickable
 ```
 
 ## Usage
-```javascript
-import Clickable from 'react-clickable';
 
-class Item {
+```javascript
+import * as React from 'react';
+import { Clickable, StopPropagation } from 'react-clickable';
+
+class Item extends React.Component{
+  state = { showModal: false };
+
   onSelect () {
-    console.log('Clickable clicked!');
+    console.log('Item selected!');
   }
 
   showTooltip (e) {
@@ -28,26 +44,62 @@ class Item {
   }
 
   render () {
-    <Clickable
-      className="item"
-      onClick={this.onSelect}
-    >
+    <Clickable onClick={this.onSelect}>
+      <StopPropagation>
+        <SomeModal show={this.state.showModal} />
+      </StopPropagation>
+      <div>Some clickable content!</div>
       <button
-        className="tooltip"
         onClick={this.showTooltip} />
-        <Icon src="info">
       </button>
     </Clickable>
   }
 }
 ```
 
-## Props
-```
-type Props = {
-  onClick: (e: SyntheticEvent<*>) => void,
-  children: React.Node,
-  ariaLabel?: string,
-  className?: string
-}
-```
+## Clickable props
+
+### onClick
+
+> `event => void`
+
+Pass an event handler that will be called on `Clickable` click
+
+### onKeyDown
+
+> `event => void` | `default: props.onClick`
+
+Pass an event handler that will be called on key press when `Clickable` is focused
+
+### children
+
+> `React.Node`
+
+Children rendered inside `Clickable`
+
+### ariaLabel (optional)
+
+> `string`
+
+accessible name for `Clickable` component
+
+### className (optional)
+
+> `string`
+
+CSS class for `Clickable` element
+
+
+## StopPropagation props
+
+### children
+
+> `React.Node`
+
+Children rendered inside `StopPropagation`.
+
+### className (optional)
+
+> `string`
+
+CSS class for `StopPropagation` element
