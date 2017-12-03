@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react';
-import cc from 'classcat';
-import s from './styles.css';
 
 type Props = {
   children: React.Node,
@@ -20,17 +18,16 @@ export default class StopPropagation extends React.Component<Props> {
   };
 
   render() {
-    const { children, className } = this.props;
-
     return (
       <div
-        className={cc(s.stopPropagation, className)}
+        {...this.props}
+        style={{ cursor: 'default' }}
         role="button"
         tabIndex="-1"
         onKeyDown={this.onKeyDown}
         onClick={this.onClick}
       >
-        {children}
+        {this.props.children}
       </div>
     );
   }
