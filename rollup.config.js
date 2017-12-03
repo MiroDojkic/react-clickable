@@ -2,6 +2,7 @@ import flow from 'rollup-plugin-flow';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
+import css from 'modular-css-rollup';
 
 export default {
   input: 'src/index.js',
@@ -17,14 +18,13 @@ export default {
     }
   ],
   plugins: [
+    css({
+      css: 'dist/style.css'
+    }),
     flow(),
     commonjs({
-      include: [
-        'node_modules/**'
-      ],
-      exclude: [
-        'node_modules/process-es6/**'
-      ],
+      include: ['node_modules/**'],
+      exclude: ['node_modules/process-es6/**'],
       namedExports: {
         'node_modules/react/index.js': ['Component', 'createElement'],
         'node_modules/react-dom/index.js': ['render']
@@ -34,6 +34,6 @@ export default {
       module: true,
       main: true
     }),
-    babel()
+    babel({ exclude: 'node_modules/**' })
   ]
 };
