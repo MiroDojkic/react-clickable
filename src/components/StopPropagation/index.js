@@ -18,16 +18,17 @@ export default class StopPropagation extends React.Component<Props> {
   };
 
   render() {
+    const { children, className } = this.props;
     return (
       <div
-        {...this.props}
         style={{ cursor: 'default' }}
         role="button"
         tabIndex="-1"
         onKeyDown={this.onKeyDown}
         onClick={this.onClick}
+        className={className}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   }
