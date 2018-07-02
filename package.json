@@ -1,14 +1,28 @@
 {
   "name": "react-clickable",
   "version": "1.0.0",
-  "description": "",
+  "description": "Clickable component that enables nesting other button and anchor elements. a11y compliant.",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "src"
+  ],
   "scripts": {
     "build": "rollup -c",
     "test": "jest --verbose"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "clickable",
+    "a11y"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiroDojkic/react-clickable"
+  },
+  "author": "Miro Dojkic <miro@appac.us>",
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.23.0",
@@ -32,7 +46,10 @@
     "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-node-resolve": "^3.0.0"
   },
-  "dependencies": {},
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/testSetup.js"
   }
