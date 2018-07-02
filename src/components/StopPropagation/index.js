@@ -7,13 +7,13 @@ type Props = {
 };
 
 export default class StopPropagation extends React.Component<Props> {
-  onClick = (event: Event): void => {
-    event.stopPropagation();
+  onClick = (e: Event): void => {
+    e.stopPropagation();
   };
 
-  onKeyDown: OnKeyDown = event => {
+  onKeyDown = (e: Event): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      event.stopPropagation();
+      e.stopPropagation();
     }
   };
 
