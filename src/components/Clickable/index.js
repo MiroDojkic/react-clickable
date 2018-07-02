@@ -1,22 +1,19 @@
 // @flow
-import * as React from 'react';
+import React, {Component} from 'react';
+import type {Node} from 'react';
 
 type Props = {
   onClick: (e: SyntheticEvent<*>) => void,
-  children: React.Node,
+  children: Node,
   ariaLabel?: string,
-  className?: string
 };
 
-type OnKeyDown = (SyntheticEvent<*>) => void;
-
-export default class Clickable extends React.Component<Props, void> {
+export default class Clickable extends Component<Props, void> {
   static defaultProps = {
     ariaLabel: '',
-    className: ''
   };
 
-  onKeyDown: OnKeyDown = e => {
+  onKeyDown = (e: Event): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
       this.props.onClick(e);
     }

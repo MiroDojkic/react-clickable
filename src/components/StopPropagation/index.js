@@ -1,12 +1,13 @@
 // @flow
-import * as React from 'react';
+import React, {Component} from 'react';
+import type {Node} from 'react';
 
 type Props = {
-  children: React.Node,
+  children: Node,
   className?: string
 };
 
-export default class StopPropagation extends React.Component<Props> {
+export default class StopPropagation extends Component<Props> {
   onClick = (e: Event): void => {
     e.stopPropagation();
   };
