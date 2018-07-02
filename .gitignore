@@ -1,3 +1,20 @@
-dist/index.js
-dist/style.css
+# OS generated files
+.*
+*.db
+*.log
 node_modules
+dist
+es
+lib
+coverage
+
+# Trailing dotted files
+!.all-contributorsrc
+!.babelrc
+!.editorconfig
+!.gitignore
+!.lintstagedrc
+!.npmignore
+!.prettierrc
+!.travis.yml
+!.github
