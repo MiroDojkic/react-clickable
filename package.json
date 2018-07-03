@@ -27,6 +27,7 @@
   },
   "author": "Miro Dojkic <miro@appac.us>",
   "license": "ISC",
+  "sideEffects": false,
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
