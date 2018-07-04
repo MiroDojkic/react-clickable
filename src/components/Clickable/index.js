@@ -3,14 +3,19 @@ import React, {Component} from 'react';
 import type {Node} from 'react';
 
 type Props = {
-  onClick: (e: SyntheticEvent<*>) => void,
-  children: Node,
   ariaLabel?: string,
+  children: Node,
+  onClick: (e: SyntheticEvent<*>) => void,
+  role?: string,
+  tabIndex?: number,
 };
+
+const defaultStyle = { cursor: 'pointer' };
 
 export default class Clickable extends Component<Props, void> {
   static defaultProps = {
-    ariaLabel: '',
+    role: 'button',
+    tabIndex: 0,
   };
 
   onKeyDown = (e: Event): void => {
@@ -20,16 +25,23 @@ export default class Clickable extends Component<Props, void> {
   };
 
   render() {
-    const { children, ariaLabel, onKeyDown, ...rest } = this.props;
+    const {
+      ariaLabel,
+      children,
+      onKeyDown,
+      role,
+      tabIndex,
+      ...rest
+    } = this.props;
 
     return (
       <div
-        {...rest}
-        style={{ cursor: 'pointer' }}
-        tabIndex="0"
-        role="button"
         aria-label={ariaLabel}
         onKeyDown={onKeyDown ? onKeyDown : this.onKeyDown}
+        style={defaultStyle}
+        role={role}
+        tabIndex={tabIndex}
+        {...rest}
       >
         {children}
       </div>

@@ -96,11 +96,16 @@ Pass an event handler that will be called on `Enter` or `Space` key press, when
 
 accessible name for `Clickable` component
 
-### className (optional)
+### role (optional)
 
-> `string`
+> `string` | `default: "button"`
 
-CSS class for `Clickable` element
+[ARIA role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) for rendered div
+
+### tabIndex (optional)
+
+> `number` | `default: 0`
+
 
 ## StopPropagation props
 
