@@ -40,6 +40,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "coveralls": "^3.0.2",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "flow-bin": "^0.75.0",
@@ -59,6 +60,9 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/testSetup.js",
+    "coveragePathIgnorePatterns": [
+      "testSetup.js"
+    ],
     "coverageReporters": [
       "text",
       "lcov"
