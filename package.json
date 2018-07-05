@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run clean && rollup -c",
     "clean": "rm -rf dist es lib",
-    "test": "jest --verbose"
+    "test": "jest --verbose --coverage"
   },
   "keywords": [
     "react",
@@ -55,6 +55,10 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/testSetup.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/testSetup.js",
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
   }
 }
