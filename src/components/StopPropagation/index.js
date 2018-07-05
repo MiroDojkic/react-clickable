@@ -7,6 +7,8 @@ type Props = {
   className?: string
 };
 
+const defaultStyle = { cursor: 'pointer' };
+
 export default class StopPropagation extends Component<Props> {
   onClick = (e: Event): void => {
     e.stopPropagation();
@@ -22,12 +24,11 @@ export default class StopPropagation extends Component<Props> {
     const { children, className } = this.props;
     return (
       <div
-        style={{ cursor: 'default' }}
-        role="button"
-        tabIndex="-1"
-        onKeyDown={this.onKeyDown}
-        onClick={this.onClick}
         className={className}
+        onClick={this.onClick}
+        onKeyDown={this.onKeyDown}
+        style={defaultStyle}
+        tabIndex="-1"
       >
         {children}
       </div>

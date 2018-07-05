@@ -2,19 +2,29 @@ import React from 'react';
 import { mount } from 'enzyme';
 import StopPropagation from '../src/components/StopPropagation';
 
+const onClick = jest.fn();
+const getWrapper = (customProps = {}) => {
+  return mount(
+    <div onClick={onClick}>
+      <StopPropagation
+        {...customProps}
+      >
+        <div>
+          <div id="nestedChild" />
+        </div>
+      </StopPropagation>
+      <div id="clickableChild" />
+    </div>
+  );
+}
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+
 describe('StopPropagation component', () => {
   test('stops "click" event propagation to Clickable parent component.', () => {
-    const onClick = jest.fn();
-    const wrapper = mount(
-      <div onClick={onClick}>
-        <StopPropagation>
-          <div>
-            <div id="nestedChild" />
-          </div>
-        </StopPropagation>
-        <div id="clickableChild" />
-      </div>
-    );
+    const wrapper = getWrapper();
 
     wrapper.find('#nestedChild').simulate('click');
     expect(onClick).toHaveBeenCalledTimes(0);
@@ -24,21 +34,10 @@ describe('StopPropagation component', () => {
   });
 
   test('stops "onKeyDown" event propagation to Clickable parent component.', () => {
-    const onClick = jest.fn();
-    const wrapper = mount(
-      <div onClick={onClick}>
-        <StopPropagation>
-          <div>
-            <div id="nestedChild" />
-          </div>
-        </StopPropagation>
-        <div id="clickableChild" />
-      </div>
-    );
-
+    const wrapper = getWrapper();
     const nestedChild = wrapper.find('#nestedChild');
 
-    // Test both "Enter" and "Space bar" keyDown events
+    // Test stoppage of "Enter" and "Space bar" keyDown events
     const enterEventStopPropagation = jest.fn();
     nestedChild.simulate('keyDown', {
       keyCode: 13,
@@ -53,6 +52,7 @@ describe('StopPropagation component', () => {
     });
     expect(spaceEventStopPropagation).toHaveBeenCalledTimes(1);
 
+    // Make sure propagation works for other children
     const clickableEventStopPropagation = jest.fn();
     wrapper.find('#clickableChild').simulate('keyDown', {
       keyCode: 13,
