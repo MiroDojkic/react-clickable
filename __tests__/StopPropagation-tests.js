@@ -22,8 +22,9 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
+// @NOTE: enzyme emulates "event.stopPropagation" bubbling only when "simulate('click')"
 describe('StopPropagation component', () => {
-  test('stops "click" event propagation to Clickable parent component.', () => {
+  test('stops "onClick" event propagation', () => {
     const wrapper = getWrapper();
 
     wrapper.find('#nestedChild').simulate('click');
@@ -33,7 +34,22 @@ describe('StopPropagation component', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  test('stops "onKeyDown" event propagation to Clickable parent component.', () => {
+  test('stops "onMouseDown" event propagation', () => {
+    const wrapper = getWrapper();
+    const eventStopPropagation = jest.fn();
+
+    wrapper.find('#nestedChild').simulate('mouseDown', {
+      stopPropagation: eventStopPropagation,
+    });
+    expect(eventStopPropagation).toHaveBeenCalledTimes(1);
+
+    wrapper.find('#clickableChild').simulate('mouseDown', {
+      stopPropagation: eventStopPropagation,
+    });
+    expect(eventStopPropagation).toHaveBeenCalledTimes(1);
+  });
+
+  test('stops "onKeyDown" event propagation', () => {
     const wrapper = getWrapper();
     const nestedChild = wrapper.find('#nestedChild');
 

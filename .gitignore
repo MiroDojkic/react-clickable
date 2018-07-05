@@ -12,9 +12,10 @@ coverage
 !.all-contributorsrc
 !.babelrc
 !.editorconfig
+!.flowconfig
+!.github
 !.gitignore
 !.lintstagedrc
 !.npmignore
 !.prettierrc
 !.travis.yml
-!.github

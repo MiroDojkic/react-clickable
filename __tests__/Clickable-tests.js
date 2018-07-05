@@ -26,32 +26,81 @@ describe('Clickable component', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  test('onClick is called when child is clicked.', () => {
-    const wrapper = getWrapper();
+  describe('"onClick" callback', () => {
+    test('is called when child is clicked.', () => {
+      const wrapper = getWrapper();
 
-    wrapper.find('#child').simulate('click');
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
-
-  test('onClick is called on keyDown "Enter"', () => {
-    const wrapper = getWrapper();
-
-    wrapper.find('#child').simulate('keyDown', {
-      keyCode: 13,
+      wrapper.find('#child').simulate('click');
+      expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
+    test('is called on "Enter" keyDown', () => {
+      const wrapper = getWrapper();
 
-  test('onClick is called on keyDown "Space"', () => {
-    const wrapper = getWrapper();
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
 
-    wrapper.find('#child').simulate('keyDown', {
-      keyCode: 32,
+      expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
+    test('is called on "Space" keyDown', () => {
+      const wrapper = getWrapper();
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 32,
+      });
+
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+  })
+
+  describe('"onMouseDown" callback', () => {
+    test('is called when child is clicked.', () => {
+      const onMouseDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick: null,
+        onMouseDown,
+      });
+
+      wrapper.find('#child').simulate('mouseDown');
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
+
+    test('is called on "Enter/Spacebar" keyDown', () => {
+      const onMouseDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick: null,
+        onMouseDown,
+      });
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
+
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
+  })
+
+  describe('"onKeyDown" callback', () => {
+    test('is called on "Enter/Spacebar" keyDown in place of "onClick" or "onMouseDown" callbacks', () => {
+      const onMouseDown = jest.fn();
+      const onKeyDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick,
+        onMouseDown,
+        onKeyDown,
+      });
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
+
+      expect(onKeyDown).toHaveBeenCalledTimes(1);
+      expect(onClick).toHaveBeenCalledTimes(0);
+      expect(onMouseDown).toHaveBeenCalledTimes(0);
+    });
+  })
 
   describe('rendered div', () => {
     test('should render default ARIA attributes "role" and "tabIndex"', () => {

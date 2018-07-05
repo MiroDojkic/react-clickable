@@ -66,14 +66,16 @@ class Item extends Component {
 
 Property | Type | Description | Default
 ----- | ----- | ----- | -----
-**onClick** *(required)* | *Function* | Pass an event handler that will be called on `Clickable` click | -
-**onKeyDown** | *Function* | Pass an event handler that will be called on `Enter` or `Space` key press, when `Clickable` is focused | `event => void`
+**onClick** | *Function* | Event handler for `Clickable`'s' `onClick` event | -
+**onMouseDown** | *Function* | Event handler for `Clickable`'s' `onmouseDown` event | -
+**onKeyDown** | *Function* | Custom event handler called on `Enter` or `Space` key press, when `Clickable` component is focused. When not provided, the first callback available among `props.onClick` and  `props.onMouseDown` will be called.| -
 **ariaLabel** | *String* | Accessible name for `Clickable` component | -
 **role** | *String* | [ARIA role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) assigned to rendered div | `"button"`
 **tabIndex** | *Number* | tabIndex assigned to rendered div | `0`
 
-Any other property will be forwarded to the rendered div.
+At least one among **onClick** or **onMouseDown** callback must be **mandatorily declared**.
 
+**Any other property** will be forwarded to the rendered div.
 
 ## StopPropagation props
 
@@ -81,7 +83,6 @@ Property | Type | Description | Default
 ----- | ----- | ----- | -----
 **children** | *Node* | Elements rendered inside `StopPropagation`. | -
 **className** | *String* | CSS class for rendered div | -
-
 
 ## Contribute
 

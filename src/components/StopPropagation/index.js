@@ -10,11 +10,11 @@ type Props = {
 const defaultStyle = { cursor: 'pointer' };
 
 export default class StopPropagation extends Component<Props> {
-  onClick = (e: Event): void => {
+  stopEventPropagation = (e: SyntheticEvent<>): void => {
     e.stopPropagation();
   };
 
-  onKeyDown = (e: Event): void => {
+  onKeyDown = (e: SyntheticKeyboardEvent<>): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
       e.stopPropagation();
     }
@@ -25,7 +25,8 @@ export default class StopPropagation extends Component<Props> {
     return (
       <div
         className={className}
-        onClick={this.onClick}
+        onClick={this.stopEventPropagation}
+        onMouseDown={this.stopEventPropagation}
         onKeyDown={this.onKeyDown}
         style={defaultStyle}
         tabIndex="-1"
