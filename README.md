@@ -1,22 +1,15 @@
 # react-clickable
 
-React components that enable nesting interactive elements within `clickable`
-elements.
+Clickable and [Accessible (a11y)](https://a11yproject.com/) React components with zero configuration. Nesting supported.
 
 ## Components:
 
 * `Clickable` - accessible clickable component
-* `StopPropagation` - component that stops event propagation to make a child of
-  `Clickable` unclickable
+* `StopPropagation` - stops event propagation to make a child of `Clickable` unclickable
 
 :warning: Although this is considered _bad_ practice in UI design, there are
 exceptions wherein accessible clickable component comes in handy. Nevertheless,
 please reconsider if this is the right way to implement what you want.
-
-## Dependencies
-
-* `react`
-* `react-dom`
 
 ## Install
 
@@ -30,10 +23,10 @@ npm install --save react-clickable
 event propagation.
 
 ```javascript
-import * as React from 'react';
+import React, {Component} from 'react';
 import { Clickable, StopPropagation } from 'react-clickable';
 
-class Item extends React.Component{
+class Item extends Component {
   state = { showModal: false };
 
   onSelect () {
@@ -71,55 +64,24 @@ class Item extends React.Component{
 
 ## Clickable props
 
-### onClick
+Property | Type | Description | Default
+----- | ----- | ----- | -----
+**onClick** *(required)* | *Function* | Pass an event handler that will be called on `Clickable` click | -
+**onKeyDown** | *Function* | Pass an event handler that will be called on `Enter` or `Space` key press, when `Clickable` is focused | `event => void`
+**ariaLabel** | *String* | Accessible name for `Clickable` component | -
+**role** | *String* | [ARIA role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) assigned to rendered div | `"button"`
+**tabIndex** | *Number* | tabIndex assigned to rendered div | `0`
 
-> `event => void`
-
-Pass an event handler that will be called on `Clickable` click
-
-### children
-
-> `React.Node`
-
-Children rendered inside `Clickable`
-
-### onKeyDown (optional)
-
-> `event => void` | `default: props.onClick`
-
-Pass an event handler that will be called on `Enter` or `Space` key press, when
-`Clickable` is focused
-
-### ariaLabel (optional)
-
-> `string`
-
-accessible name for `Clickable` component
-
-### role (optional)
-
-> `string` | `default: "button"`
-
-[ARIA role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) for rendered div
-
-### tabIndex (optional)
-
-> `number` | `default: 0`
+Any other property will be forwarded to the rendered div.
 
 
 ## StopPropagation props
 
-### children
+Property | Type | Description | Default
+----- | ----- | ----- | -----
+**children** | *Node* | Elements rendered inside `StopPropagation`. | -
+**className** | *String* | CSS class for rendered div | -
 
-> `React.Node`
-
-Children rendered inside `StopPropagation`.
-
-### className (optional)
-
-> `string`
-
-CSS class for `StopPropagation` element
 
 ## Contribute
 

@@ -19,7 +19,8 @@
   "keywords": [
     "react",
     "clickable",
-    "a11y"
+    "a11y",
+    "accessibility"
   ],
   "repository": {
     "type": "git",
