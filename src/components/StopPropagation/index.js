@@ -1,10 +1,10 @@
 // @flow
-import React, {Component} from 'react';
-import type {Node} from 'react';
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
 type Props = {
   children: Node,
-  className?: string
+  className?: string,
 };
 
 const defaultStyle = { cursor: 'pointer' };

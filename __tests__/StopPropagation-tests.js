@@ -6,9 +6,7 @@ const onClick = jest.fn();
 const getWrapper = (customProps = {}) => {
   return mount(
     <div onClick={onClick}>
-      <StopPropagation
-        {...customProps}
-      >
+      <StopPropagation {...customProps}>
         <div>
           <div id="nestedChild" />
         </div>
@@ -16,7 +14,7 @@ const getWrapper = (customProps = {}) => {
       <div id="clickableChild" />
     </div>
   );
-}
+};
 
 beforeEach(() => {
   jest.resetAllMocks();

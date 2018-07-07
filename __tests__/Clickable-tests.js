@@ -5,14 +5,11 @@ import Clickable from '../src/components/Clickable';
 const onClick = jest.fn();
 const getWrapper = (customProps = {}) => {
   return mount(
-    <Clickable
-      onClick={onClick}
-      {...customProps}
-    >
+    <Clickable onClick={onClick} {...customProps}>
       <div id="child" />
     </Clickable>
   );
-}
+};
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -53,7 +50,7 @@ describe('Clickable component', () => {
 
       expect(onClick).toHaveBeenCalledTimes(1);
     });
-  })
+  });
 
   describe('"onMouseDown" callback', () => {
     test('is called when child is clicked.', () => {
@@ -80,7 +77,7 @@ describe('Clickable component', () => {
 
       expect(onMouseDown).toHaveBeenCalledTimes(1);
     });
-  })
+  });
 
   describe('"onKeyDown" callback', () => {
     test('is called on "Enter/Spacebar" keyDown in place of "onClick" or "onMouseDown" callbacks', () => {
@@ -100,7 +97,7 @@ describe('Clickable component', () => {
       expect(onClick).toHaveBeenCalledTimes(0);
       expect(onMouseDown).toHaveBeenCalledTimes(0);
     });
-  })
+  });
 
   describe('rendered div', () => {
     test('should render default ARIA attributes "role" and "tabIndex"', () => {
@@ -129,12 +126,12 @@ describe('Clickable component', () => {
         foo: 'bar',
         style: {
           color: 'green',
-        }
+        },
       });
       const div = wrapper.find('div').first();
 
       expect(div).toHaveProp('foo', 'bar');
-      expect(div).toHaveProp('style', {color: 'green'});
+      expect(div).toHaveProp('style', { color: 'green' });
     });
-  })
+  });
 });

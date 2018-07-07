@@ -5,9 +5,7 @@ import resolve from 'rollup-plugin-node-resolve';
 let pkg = require('./package.json');
 let external = []
   // Mark dependencies and peerDependencies as external
-  .concat(
-    Object.keys(pkg.dependencies), Object.keys(pkg.peerDependencies)
-  );
+  .concat(Object.keys(pkg.dependencies), Object.keys(pkg.peerDependencies));
 
 export default {
   input: 'src/index.js',
@@ -45,7 +43,7 @@ export default {
     commonjs({
       namedExports: {
         'node_modules/react/index.js': ['Component'],
-      }
+      },
     }),
-  ]
+  ],
 };

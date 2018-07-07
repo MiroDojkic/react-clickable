@@ -1,16 +1,16 @@
 // @flow
-import React, {Component} from 'react';
-import type {Node} from 'react';
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
 type WithOnClick = {
   onClick: (e?: SyntheticEvent<>) => void,
   onMouseDown?: (e?: SyntheticEvent<>) => void,
-}
+};
 
 type WithOnMouseDown = {
   onClick?: (e?: SyntheticEvent<>) => void,
   onMouseDown: (e?: SyntheticEvent<>) => void,
-}
+};
 
 type AtLeastOneMouseEventHandler = WithOnClick | WithOnMouseDown;
 
@@ -34,7 +34,8 @@ export default class Clickable extends Component<Props, void> {
 
   onKeyDown = (e: SyntheticKeyboardEvent<>): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      const eventHandler = this.props.onKeyDown || this.props.onClick || this.props.onMouseDown;
+      const eventHandler =
+        this.props.onKeyDown || this.props.onClick || this.props.onMouseDown;
 
       if (eventHandler) {
         eventHandler(e);
