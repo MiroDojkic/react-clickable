@@ -92,3 +92,13 @@ open an issue.
 ## License
 
 MIT
+
+## Contributors
+
+Thanks to you all ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars2.githubusercontent.com/u/9119913?v=4" width="100px;"/><br /><sub><b>Miro Dojkic</b></sub>](https://github.com/MiroDojkic)<br />[💻](https://github.com/MiroDojkic/react-clickable/commits?author=MiroDojkic "Code") [💬](#question-MiroDojkic "Answering Questions") [📖](https://github.com/MiroDojkic/react-clickable/commits?author=MiroDojkic "Documentation") [💡](#example-MiroDojkic "Examples") [🤔](#ideas-MiroDojkic "Ideas, Planning, & Feedback") [🚇](#infra-MiroDojkic "Infrastructure (Hosting, Build-Tools, etc)") [👀](#review-MiroDojkic "Reviewed Pull Requests") [⚠️](https://github.com/MiroDojkic/react-clickable/commits?author=MiroDojkic "Tests") | [<img src="https://avatars3.githubusercontent.com/u/4573549?v=4" width="100px;"/><br /><sub><b>Andrea Carraro</b></sub>](http://www.andreacarraro.it)<br />[💻](https://github.com/MiroDojkic/react-clickable/commits?author=toomuchdesign "Code") [📖](https://github.com/MiroDojkic/react-clickable/commits?author=toomuchdesign "Documentation") [🤔](#ideas-toomuchdesign "Ideas, Planning, & Feedback") [🚇](#infra-toomuchdesign "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/MiroDojkic/react-clickable/commits?author=toomuchdesign "Tests") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
