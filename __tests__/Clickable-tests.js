@@ -1,53 +1,137 @@
-import * as React from 'react';
-import { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
+import React from 'react';
+import { mount } from 'enzyme';
 import Clickable from '../src/components/Clickable';
-import StopPropagation from '../src/components/StopPropagation';
+
+const onClick = jest.fn();
+const getWrapper = (customProps = {}) => {
+  return mount(
+    <Clickable onClick={onClick} {...customProps}>
+      <div id="child" />
+    </Clickable>
+  );
+};
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('Clickable component', () => {
   test('is clickable.', () => {
-    const onClick = sinon.spy();
-    const clickable = shallow(<Clickable onClick={onClick} />);
+    const wrapper = getWrapper();
 
-    clickable.simulate('click');
-    expect(onClick).toHaveProperty('callCount', 1);
+    wrapper.simulate('click');
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  test('onClick is called when child is clicked.', () => {
-    const onClick = sinon.spy();
-    const html = mount(
-      <Clickable onClick={onClick}>
-        <div id="child" />
-      </Clickable>
-    );
+  describe('"onClick" callback', () => {
+    test('is called when child is clicked.', () => {
+      const wrapper = getWrapper();
 
-    html.find('#child').simulate('click');
-    expect(onClick).toHaveProperty('callCount', 1);
+      wrapper.find('#child').simulate('click');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    test('is called on "Enter" keyDown', () => {
+      const wrapper = getWrapper();
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
+
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    test('is called on "Space" keyDown', () => {
+      const wrapper = getWrapper();
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 32,
+      });
+
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
   });
-});
 
-describe('StopPropagation component', () => {
-  test('stops event propagation to Clickable parent component.', () => {
-    const onClick = sinon.spy();
-    const html = mount(
-      <Clickable onClick={onClick}>
-        <StopPropagation>
-          <div id="child">
-            <div id="nestedChild" />
-          </div>
-        </StopPropagation>
-        <div id="clickableChild" />
-      </Clickable>
-    );
+  describe('"onMouseDown" callback', () => {
+    test('is called when child is clicked.', () => {
+      const onMouseDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick: null,
+        onMouseDown,
+      });
 
-    html.find('#child').simulate('click');
-    expect(onClick).toHaveProperty('callCount', 0);
+      wrapper.find('#child').simulate('mouseDown');
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
 
-    html.find('#nestedChild').simulate('click');
-    expect(onClick).toHaveProperty('callCount', 0);
+    test('is called on "Enter/Spacebar" keyDown', () => {
+      const onMouseDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick: null,
+        onMouseDown,
+      });
 
-    html.find('#clickableChild').simulate('click');
-    expect(onClick).toHaveProperty('callCount', 1);
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
+
+      expect(onMouseDown).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('"onKeyDown" callback', () => {
+    test('is called on "Enter/Spacebar" keyDown in place of "onClick" or "onMouseDown" callbacks', () => {
+      const onMouseDown = jest.fn();
+      const onKeyDown = jest.fn();
+      const wrapper = getWrapper({
+        onClick,
+        onMouseDown,
+        onKeyDown,
+      });
+
+      wrapper.find('#child').simulate('keyDown', {
+        keyCode: 13,
+      });
+
+      expect(onKeyDown).toHaveBeenCalledTimes(1);
+      expect(onClick).toHaveBeenCalledTimes(0);
+      expect(onMouseDown).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('rendered div', () => {
+    test('should render default ARIA attributes "role" and "tabIndex"', () => {
+      const wrapper = getWrapper();
+      const div = wrapper.find('div').first();
+
+      expect(div).toHaveProp('role', 'button');
+      expect(div).toHaveProp('tabIndex', 0);
+    });
+
+    test('should render custom ARIA attributes', () => {
+      const wrapper = getWrapper({
+        ariaLabel: 'customLabel',
+        role: 'customRole',
+        tabIndex: 101,
+      });
+      const div = wrapper.find('div').first();
+
+      expect(div).toHaveProp('aria-label', 'customLabel');
+      expect(div).toHaveProp('role', 'customRole');
+      expect(div).toHaveProp('tabIndex', 101);
+    });
+
+    test('should render any custom attribute/style', () => {
+      const wrapper = getWrapper({
+        foo: 'bar',
+        style: {
+          color: 'green',
+        },
+      });
+      const div = wrapper.find('div').first();
+
+      expect(div).toHaveProp('foo', 'bar');
+      expect(div).toHaveProp('style', { color: 'green' });
+    });
   });
 });

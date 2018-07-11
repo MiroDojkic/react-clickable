@@ -1,0 +1,7 @@
+.git/
+dist/
+es/
+lib/
+coverage/
+package.json
+package-lock.json

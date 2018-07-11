@@ -1,38 +1,66 @@
 // @flow
-import * as React from 'react';
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
-type Props = {
-  onClick: (e: SyntheticEvent<*>) => void,
-  children: React.Node,
-  ariaLabel?: string,
-  className?: string
+type WithOnClick = {
+  onClick: (e?: SyntheticEvent<>) => void,
+  onMouseDown?: (e?: SyntheticEvent<>) => void,
 };
 
-type OnKeyDown = (SyntheticEvent<*>) => void;
+type WithOnMouseDown = {
+  onClick?: (e?: SyntheticEvent<>) => void,
+  onMouseDown: (e?: SyntheticEvent<>) => void,
+};
 
-export default class Clickable extends React.Component<Props, void> {
+type AtLeastOneMouseEventHandler = WithOnClick | WithOnMouseDown;
+
+type OtherProps = {
+  ariaLabel?: string,
+  children: Node,
+  onKeyDown: (e?: SyntheticKeyboardEvent<>) => void,
+  role?: string,
+  tabIndex?: number,
+};
+
+type Props = AtLeastOneMouseEventHandler & OtherProps;
+
+const defaultStyle = { cursor: 'pointer' };
+
+export default class Clickable extends Component<Props, void> {
   static defaultProps = {
-    ariaLabel: '',
-    className: ''
+    role: 'button',
+    tabIndex: 0,
   };
 
-  onKeyDown: OnKeyDown = e => {
+  onKeyDown = (e: SyntheticKeyboardEvent<>): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      this.props.onClick(e);
+      const eventHandler =
+        this.props.onKeyDown || this.props.onClick || this.props.onMouseDown;
+
+      if (eventHandler) {
+        eventHandler(e);
+      }
     }
   };
 
   render() {
-    const { children, ariaLabel, onKeyDown, ...rest } = this.props;
+    const {
+      ariaLabel,
+      children,
+      onKeyDown,
+      role,
+      tabIndex,
+      ...rest
+    } = this.props;
 
     return (
       <div
-        {...rest}
-        style={{ cursor: 'pointer' }}
-        tabIndex="0"
-        role="button"
         aria-label={ariaLabel}
-        onKeyDown={onKeyDown ? onKeyDown : this.onKeyDown}
+        onKeyDown={this.onKeyDown}
+        style={defaultStyle}
+        role={role}
+        tabIndex={tabIndex}
+        {...rest}
       >
         {children}
       </div>

@@ -3,16 +3,31 @@
     [
       "env",
       {
-        "modules": false
+        "targets": {
+          "browsers": [
+            "ie >= 11"
+          ]
+        },
+        "modules": false,
+        "loose": true
       }
     ],
-    "react"
+    "react",
   ],
-  "plugins": ["transform-object-rest-spread", "transform-class-properties"],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ],
   "env": {
     "test": {
-      "presets": [["env"], "react"],
-      "plugins": ["transform-object-rest-spread", "transform-class-properties"]
+      "presets": [
+        ["env"],
+        "react",
+      ],
+      "plugins": [
+        "transform-object-rest-spread",
+        "transform-class-properties"
+      ],
     }
   }
 }

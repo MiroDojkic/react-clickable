@@ -1,19 +1,22 @@
 // @flow
-import * as React from 'react';
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
 type Props = {
-  children: React.Node,
-  className?: string
+  children: Node,
+  className?: string,
 };
 
-export default class StopPropagation extends React.Component<Props> {
-  onClick = (event: Event): void => {
-    event.stopPropagation();
+const defaultStyle = { cursor: 'pointer' };
+
+export default class StopPropagation extends Component<Props> {
+  stopEventPropagation = (e: SyntheticEvent<>): void => {
+    e.stopPropagation();
   };
 
-  onKeyDown: OnKeyDown = event => {
+  onKeyDown = (e: SyntheticKeyboardEvent<>): void => {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      event.stopPropagation();
+      e.stopPropagation();
     }
   };
 
@@ -21,12 +24,12 @@ export default class StopPropagation extends React.Component<Props> {
     const { children, className } = this.props;
     return (
       <div
-        style={{ cursor: 'default' }}
-        role="button"
-        tabIndex="-1"
-        onKeyDown={this.onKeyDown}
-        onClick={this.onClick}
         className={className}
+        onClick={this.stopEventPropagation}
+        onMouseDown={this.stopEventPropagation}
+        onKeyDown={this.onKeyDown}
+        style={defaultStyle}
+        tabIndex="-1"
       >
         {children}
       </div>
