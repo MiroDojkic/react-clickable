@@ -1,6 +1,6 @@
 {
   "name": "react-clickable",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Clickable component that enables nesting other button and anchor elements. a11y compliant.",
   "main": "lib/index.js",
   "module": "es/index.js",
