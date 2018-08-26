@@ -1,6 +1,7 @@
 # react-clickable
 
 Clickable and [Accessible (a11y)](https://a11yproject.com/) React components with zero configuration. Nesting supported.
+Check out the [demo](https://stackblitz.com/edit/react-clickable-demo?file=Item.js).
 
 ## Components:
 
